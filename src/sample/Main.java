@@ -86,12 +86,24 @@ public class Main extends Application {
         });
 
         Button s2_b3 = new Button("Export Result");
+        s2_b3.setOnAction(e->{
+            Exporter e1 = new Exporter(Data);
+            try {
+                e1.writeCSV();
+
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            Alert a = new Alert(Alert.AlertType.NONE);
+            a.setAlertType(Alert.AlertType.INFORMATION);
+            a.setContentText("result.csv created in project directory");
+            a.show();
+        });
         Button s2_b4 = new Button("Back");
 
+        //Scene Configuration
         VBox s2_v1 = new VBox(s2_b1,s2_b2,s2_b3,s2_b4);
         s2_v1.setSpacing(20);
-
-        //Scene Configuration
         BorderPane bPane = new BorderPane();
         bPane.setCenter(tableView);
         bPane.setRight(s2_v1);

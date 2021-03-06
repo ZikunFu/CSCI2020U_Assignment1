@@ -17,13 +17,13 @@ public class TestFile {
 
     //Getter Setters
     public String getFilename(){ return filename.get(); }
-    public String title(){ return subject.get(); }
+    public String getSubject(){ return subject.get(); }
     public double getSpamProbability(){ return spamProbability.get(); }
     public String getSpamProbRounded(){
         DecimalFormat df = new DecimalFormat("0.00000");
-        return df.format(this.spamProbability.get());
+        return df.format(spamProbability.get());
     }
-    public String getActualClass(){return this.actualClass.get();}
+    public String getActualClass(){return actualClass.get();}
     public File getFile(){ return file; }
     public void setFilename(String val) { filename = new SimpleStringProperty(val); }
     public void setSpamProbability(double val) { spamProbability = new SimpleDoubleProperty(val); }
