@@ -1,26 +1,29 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
+
 public class Main extends Application {
     String location;
+    static HostServices Host;
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -41,6 +44,7 @@ public class Main extends Application {
             location=selectedDirectory.getAbsolutePath();
             primaryStage.setTitle("Spam Buster - "+location);
         });
+        Button s1_b2= new Button("Analyze");
 
         //Scene2
         FileReader f1 = new FileReader(location);
@@ -62,12 +66,37 @@ public class Main extends Application {
         tableView.setPrefHeight(600);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        Button s2_b1 = new Button("Open File");
+        s2_b1.setOnAction(e->{
+            ObservableList<TestFile> selectedRow= tableView.getSelectionModel().getSelectedItems();
+            try {
+                Desktop.getDesktop().open(selectedRow.get(0).getFile());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
+        Button s2_b2 = new Button("Open Directory");
+        s2_b2.setOnAction(e->{
+            try {
+                Runtime.getRuntime().exec("explorer.exe /select," + location);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
+        Button s2_b3 = new Button("Export Result");
+        Button s2_b4 = new Button("Back");
+
+        VBox s2_v1 = new VBox(s2_b1,s2_b2,s2_b3,s2_b4);
+        s2_v1.setSpacing(20);
+
         //Scene Configuration
         BorderPane bPane = new BorderPane();
         bPane.setCenter(tableView);
+        bPane.setRight(s2_v1);
         scene2 = new Scene(bPane);
 
-        Button s1_b2= new Button("Analyze");
         s1_b2.setMaxSize(400, 200);
         s1_b2.setOnAction(e -> primaryStage.setScene(scene2));
 
@@ -79,6 +108,7 @@ public class Main extends Application {
         gridPane.add(s1_b2, 1, 2, 1, 1);
         scene1= new Scene(gridPane, 470, 60);
 
+        s2_b4.setOnAction(e->primaryStage.setScene(scene1));
         //Stage
         primaryStage.setScene(scene1);
         primaryStage.show();

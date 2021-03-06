@@ -2,10 +2,11 @@ package sample;
 import java.text.DecimalFormat;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
-
+import java.io.File;
 public class TestFile {
     private SimpleStringProperty filename,actualClass,subject;
     private SimpleDoubleProperty  spamProbability;
+    private File file;
 
     public TestFile(String title, String filename, double spamProbability, String actualClass) {
         this.filename = new SimpleStringProperty(filename);
@@ -23,6 +24,7 @@ public class TestFile {
         return df.format(this.spamProbability.get());
     }
     public String getActualClass(){return this.actualClass.get();}
+    public File getFile(){ return file; }
     public void setFilename(String val) { filename = new SimpleStringProperty(val); }
     public void setSpamProbability(double val) { spamProbability = new SimpleDoubleProperty(val); }
     public void setActualClass(String val) { filename = new SimpleStringProperty(val); }
