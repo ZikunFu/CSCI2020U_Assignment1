@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -42,18 +43,19 @@ public class Main extends Application {
         });
 
         //Scene2
-        //ObservableList Data = source.getAllMarks();
-        //tableView.setItems(Data);
+        FileReader f1 = new FileReader(location);
+        ObservableList Data = f1.getDataList();
 
         TableView tableView = new TableView();
-        TableColumn col1 = new TableColumn("Title");
-        col1.setCellValueFactory(new PropertyValueFactory("title"));
+        tableView.setItems(Data);
+        TableColumn col1 = new TableColumn("Subject");
+        col1.setCellValueFactory(new PropertyValueFactory("subject"));
         TableColumn col2 = new TableColumn("Class");
-        col2.setCellValueFactory(new PropertyValueFactory("class"));
+        col2.setCellValueFactory(new PropertyValueFactory("actualClass"));
         TableColumn col3 = new TableColumn("Probability");
-        col3.setCellValueFactory(new PropertyValueFactory("probability"));
+        col3.setCellValueFactory(new PropertyValueFactory("spamProbability"));
         TableColumn col4 = new TableColumn("File Name");
-        col4.setCellValueFactory(new PropertyValueFactory("name"));
+        col4.setCellValueFactory(new PropertyValueFactory("filename"));
 
         tableView.getColumns().setAll(col1, col2,col3,col4);
         tableView.setPrefWidth(700);

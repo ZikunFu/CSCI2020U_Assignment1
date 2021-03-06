@@ -4,17 +4,19 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class TestFile {
-    private SimpleStringProperty filename,actualClass;
+    private SimpleStringProperty filename,actualClass,subject;
     private SimpleDoubleProperty  spamProbability;
 
-    public TestFile(String filename, double spamProbability, String actualClass) {
+    public TestFile(String title, String filename, double spamProbability, String actualClass) {
         this.filename = new SimpleStringProperty(filename);
+        this.subject = new SimpleStringProperty(title);
         this.spamProbability = new SimpleDoubleProperty(spamProbability);
         this.actualClass = new SimpleStringProperty(actualClass);
     }
 
     //Getter Setters
     public String getFilename(){ return filename.get(); }
+    public String title(){ return subject.get(); }
     public double getSpamProbability(){ return spamProbability.get(); }
     public String getSpamProbRounded(){
         DecimalFormat df = new DecimalFormat("0.00000");
