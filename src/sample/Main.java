@@ -1,10 +1,8 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.application.HostServices;
+
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -23,15 +21,15 @@ import java.io.IOException;
 
 public class Main extends Application {
     String location;
-    static HostServices Host;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+
         Scene scene1, scene2;
         primaryStage.setTitle("Spam Buster");
 
         //Scene 1
-        Label s1_l1 = new Label("Directory");
+        Label s1_l1 = new Label("Directory:");
         TextField directory = new TextField();
         directory.setPrefWidth(350);
         DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -48,7 +46,7 @@ public class Main extends Application {
 
         //Scene2
         FileReader f1 = new FileReader(location);
-        ObservableList Data = f1.getDataList();
+        ObservableList<TestFile> Data = f1.getDataList();
 
         TableView tableView = new TableView();
         tableView.setItems(Data);
@@ -62,6 +60,7 @@ public class Main extends Application {
         col4.setCellValueFactory(new PropertyValueFactory("filename"));
 
         tableView.getColumns().setAll(col1, col2,col3,col4);
+        tableView.getStylesheets().add("sample/resources/table-styles.css");
         tableView.setPrefWidth(700);
         tableView.setPrefHeight(600);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -85,12 +84,11 @@ public class Main extends Application {
             }
         });
 
-        Button s2_b3 = new Button("Export Result");
+        Button s2_b3 = new Button("Export");
         s2_b3.setOnAction(e->{
             Exporter e1 = new Exporter(Data);
             try {
                 e1.writeCSV();
-
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -102,13 +100,14 @@ public class Main extends Application {
         Button s2_b4 = new Button("Back");
 
         //Scene Configuration
-        VBox s2_v1 = new VBox(s2_b1,s2_b2,s2_b3,s2_b4);
+        VBox s2_v1 = new VBox(s2_b4,s2_b3);
+        HBox s2_h1 = new HBox(s2_b1,s2_b2);
         s2_v1.setSpacing(20);
         BorderPane bPane = new BorderPane();
         bPane.setCenter(tableView);
         bPane.setRight(s2_v1);
+        bPane.setBottom(s2_h1);
         scene2 = new Scene(bPane);
-
         s1_b2.setMaxSize(400, 200);
         s1_b2.setOnAction(e -> primaryStage.setScene(scene2));
 
@@ -118,9 +117,17 @@ public class Main extends Application {
         gridPane.setHgap(5);
         gridPane.add(s1_b1, 2, 0, 1, 1);
         gridPane.add(s1_b2, 1, 2, 1, 1);
-        scene1= new Scene(gridPane, 470, 60);
+        scene1= new Scene(gridPane, 490, 70);
 
         s2_b4.setOnAction(e->primaryStage.setScene(scene1));
+        scene1.getStylesheets().add("sample/resources/scene1-styles.css");
+        scene2.getStylesheets().add("sample/resources/scene2-styles.css");
+        s1_b1.getStylesheets().add("sample/resources/button1-styles.css");
+        s1_b2.getStylesheets().add("sample/resources/button2-styles.css");
+        s2_b1.getStylesheets().add("sample/resources/button2-styles.css");
+        s2_b2.getStylesheets().add("sample/resources/button2-styles.css");
+        s2_b3.getStylesheets().add("sample/resources/button2-styles.css");
+        s2_b4.getStylesheets().add("sample/resources/button2-styles.css");
         //Stage
         primaryStage.setScene(scene1);
         primaryStage.show();
