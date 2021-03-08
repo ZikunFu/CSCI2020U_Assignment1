@@ -2,6 +2,7 @@ a. Project information: short textual description of your project, and at least 
 of your application running.
 CSCI2020U Assignment 1
 Member: Zikun Fu (100742730)
+Member 2: Chen Yang (100742300)
 
 b. Improvements: briefly describe the improvements you made to the interface and/or the
 model (if any).

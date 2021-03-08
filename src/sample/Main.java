@@ -44,6 +44,8 @@ public class Main extends Application {
         });
         Button s1_b2= new Button("Analyze");
 
+        //First time to train
+
         //Scene2
         FileReader f1 = new FileReader(location);
         ObservableList<TestFile> Data = f1.getDataList();
