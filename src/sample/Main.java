@@ -29,7 +29,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Scene scene1, scene2;
         primaryStage.setTitle("Spam Buster");
-        //image
+        //image setting
         Image img1 = new Image("sample/resources/next.png",20,20,true,true);
         Image img2 = new Image("sample/resources/back.png",20,20,true,true);
         Image img3 = new Image("sample/resources/export.png",20,20,true,true);
@@ -44,6 +44,13 @@ public class Main extends Application {
         ImageView browser_dark = new ImageView(img6);
 
         //Scene 1
+        // this is for the first Scene which allow people to choose the directory and get the analysis
+        /*
+        * @param s1_l1 the label of Directory
+        * @param s1_b1 the button of Browse, allow people to choose the directory
+        * @param s1_b2 the button for Analyze
+        * @set Graphic(next) jump to the next Scene
+        * */
         Label s1_l1 = new Label("Directory:");
         TextField directory = new TextField();
         directory.setPrefWidth(350);
@@ -73,6 +80,12 @@ public class Main extends Application {
 
         //Scene2
         //"data/test/ham"
+        // the chart showing the chart for the answers and if they are spam or not
+        /*
+        * set the size of the chart, adding some features like export, Back
+        * with the data calculated, it will return the charts with numbers
+        *@ param col1, col2, col3, col4, showing the column of Subject, spam or ham, probability, file name respectively
+         */
 
         TableColumn col1 = new TableColumn("Subject");
         col1.setCellValueFactory(new PropertyValueFactory("subject"));
@@ -88,7 +101,7 @@ public class Main extends Application {
         tableView.setPrefWidth(700);
         tableView.setPrefHeight(600);
 
-
+        //this is for features, open file, open directory, export
         Button s2_b1 = new Button("Open File");
         s2_b1.setGraphic(file);
         s2_b1.setOnAction(e->{

@@ -3,11 +3,18 @@ import java.text.DecimalFormat;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import java.io.File;
+/*
+* build a class describe the file characteristics
+* add the new feature "File file" which can save the file in the class
+* can immediately open the file after saving
+* return a class
+* */
 public class TestFile {
     private SimpleStringProperty filename,actualClass,subject;
     private SimpleDoubleProperty  spamProbability;
     private File file;
 
+    // constructor
     public TestFile(String title, String filename, double spamProbability, String actualClass, File file) {
         this.filename = new SimpleStringProperty(filename);
         this.subject = new SimpleStringProperty(title);
