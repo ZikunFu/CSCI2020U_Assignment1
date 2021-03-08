@@ -20,13 +20,13 @@ import javafx.stage.Stage;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Main extends Application {
     String location="";
     File f;
     @Override
     public void start(Stage primaryStage) throws Exception{
-
         Scene scene1, scene2;
         primaryStage.setTitle("Spam Buster");
         //image
@@ -42,30 +42,38 @@ public class Main extends Application {
         ImageView browser_white = new ImageView(img4);
         ImageView file = new ImageView(img5);
         ImageView browser_dark = new ImageView(img6);
+
         //Scene 1
         Label s1_l1 = new Label("Directory:");
         TextField directory = new TextField();
         directory.setPrefWidth(350);
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setInitialDirectory(new File("src"));
+        directoryChooser.setInitialDirectory(new File("data"));
         Button s1_b1 =new Button("Browse");
+
+        TableView tableView = new TableView();
         s1_b1.setGraphic(browser_white);
         s1_b1.setOnAction(e -> {
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
             directory.setText(selectedDirectory.getAbsolutePath());
-            f=selectedDirectory.getAbsoluteFile();
-            location=selectedDirectory.getAbsolutePath();
-            primaryStage.setTitle("Spam Buster - "+location);
+            f = selectedDirectory.getAbsoluteFile();
+            location = selectedDirectory.getAbsolutePath();
+            primaryStage.setTitle("Spam Buster - " + location);
+            sample.FileReader f1 = new sample.FileReader(location);
+            ObservableList<TestFile> Data = null;
+            try {
+                Data = f1.analyze();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            tableView.setItems(Data);
         });
         Button s1_b2= new Button("Analyze");
         s1_b2.setGraphic(next);
+
         //Scene2
         //"data/test/ham"
-        sample.FileReader f1 = new sample.FileReader("data/test/ham");
-        ObservableList<TestFile> Data = f1.analyze();
 
-        TableView tableView = new TableView();
-        tableView.setItems(Data);
         TableColumn col1 = new TableColumn("Subject");
         col1.setCellValueFactory(new PropertyValueFactory("subject"));
         TableColumn col2 = new TableColumn("Class");
@@ -79,7 +87,7 @@ public class Main extends Application {
         tableView.getStylesheets().add("sample/resources/table-styles.css");
         tableView.setPrefWidth(700);
         tableView.setPrefHeight(600);
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
 
         Button s2_b1 = new Button("Open File");
         s2_b1.setGraphic(file);
@@ -104,7 +112,7 @@ public class Main extends Application {
         Button s2_b3 = new Button("Export");
         s2_b3.setGraphic(export);
         s2_b3.setOnAction(e->{
-            Exporter e1 = new Exporter(Data);
+            Exporter e1 = new Exporter(tableView.getItems());
             try {
                 e1.writeCSV();
             } catch (IOException ioException) {
@@ -115,6 +123,7 @@ public class Main extends Application {
             a.setContentText("result.csv created in project directory");
             a.show();
         });
+
 
         Button s2_b4 = new Button("Back");
         s2_b4.setGraphic(back);
@@ -129,7 +138,7 @@ public class Main extends Application {
         bPane.setBottom(s2_h1);
         scene2 = new Scene(bPane);
         s1_b2.setMaxSize(400, 200);
-        s1_b2.setOnAction(e -> primaryStage.setScene(scene2));
+        s1_b2.setOnAction(e ->primaryStage.setScene(scene2));
 
         GridPane gridPane = new GridPane();
         gridPane.add(s1_l1, 0, 0, 1, 1);
