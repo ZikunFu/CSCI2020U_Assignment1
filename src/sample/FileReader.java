@@ -71,7 +71,7 @@ public class FileReader {
         //Main loop
         fileList = dir.listFiles();
         for(File current: fileList){
-            //System.out.print("\nFile: "+current.getName()+"\n");
+            System.out.print("\nFile: "+current.getName()+"\n");
 
             if(current.getName()=="cmds"){
                 break;
