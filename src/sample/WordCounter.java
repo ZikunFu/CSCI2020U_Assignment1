@@ -2,7 +2,10 @@ package sample;
 
 import java.io.*;
 import java.util.*;
-
+/*
+this code is the word counter to count the number of each word appearing in each file
+reference is the tutorial from the module 5
+ */
 public class WordCounter{
     File[] content;
     private Map<String, Double> wordCounts;
@@ -10,7 +13,7 @@ public class WordCounter{
     public WordCounter(){
         wordCounts = new TreeMap<>();
     }
-
+// count the probability of the words
     public Map<String, Double> calcProb(Map<String, Double> map){
         Map<String, Double> result = new TreeMap<String, Double>();
         Set<String> keys = map.keySet();
@@ -21,6 +24,12 @@ public class WordCounter{
         }
         return result;
     }
+    /*
+    read the files until it reads the file called cmds
+    and it will return null
+    *@param content the lists of the file
+    *@return the words count
+     */
     public Map<String, Double> parseFile(File file) throws IOException{
         if(file.getName()=="cmds"){
             return null;
@@ -41,14 +50,11 @@ public class WordCounter{
         }
         return wordCounts;
     }
-/*
-    private boolean isValidWord(String word){
-        String allLetters = "^[a-zA-Z]+$";
-        // returns true if the word is composed by only letters otherwise returns false;
-        return word.matches(allLetters);
-    }
-*/
 
+    /*
+    * this is used to count the words
+    * count the total of the counts
+    * */
     private void countWord(String word){
         if(wordCounts.containsKey(word)){
             Double previous = wordCounts.get(word);
@@ -57,31 +63,5 @@ public class WordCounter{
             wordCounts.put(word, 1.0);
         }
     }
-    /*
-    public void output(int minCount, File dir) throws IOException{
-        System.out.println("Saving word counts to file:" + dir.getAbsolutePath());
-        System.out.println("Total words:" + wordCounts.keySet().size());
 
-        if (!dir.exists()){
-            dir.createNewFile();
-            if (dir.canWrite()){
-                PrintWriter fileOutput = new PrintWriter(dir);
-
-                Set<String> keys = wordCounts.keySet();
-                Iterator<String> keyIterator = keys.iterator();
-
-                while(keyIterator.hasNext()){
-                    String key = keyIterator.next();
-                    Double count = wordCounts.get(key);
-                    // testing minimum number of occurances
-                    if(count>=minCount){
-                        fileOutput.println(key + ": " + count);
-                    }
-                }
-                fileOutput.close();
-            }
-        }else{
-            System.out.println("Error: the output file already exists: " + dir.getAbsolutePath());
-        }
-    }*/
 }

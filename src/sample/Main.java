@@ -21,11 +21,20 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
-
+/*
+this main is used to execute the program
+we are setting two UIs for making the process
+the UIs are divided into two Scene
+one is for choosing directory
+the other is for showing the table
+ */
 public class Main extends Application {
     String location="";
     File f;
     @Override
+    /*
+    set all the features of size and the background of the UI
+     */
     public void start(Stage primaryStage) throws Exception{
         Scene scene1, scene2;
         primaryStage.setTitle("Spam Buster");
