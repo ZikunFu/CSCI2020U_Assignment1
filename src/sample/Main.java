@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -27,7 +29,19 @@ public class Main extends Application {
 
         Scene scene1, scene2;
         primaryStage.setTitle("Spam Buster");
-
+        //image
+        Image img1 = new Image("sample/resources/next.png",20,20,true,true);
+        Image img2 = new Image("sample/resources/back.png",20,20,true,true);
+        Image img3 = new Image("sample/resources/export.png",20,20,true,true);
+        Image img4 = new Image("sample/resources/browser1.png",20,20,true,true);
+        Image img5 = new Image("sample/resources/file.png",20,20,true,true);
+        Image img6 = new Image("sample/resources/browser2.png",20,20,true,true);
+        ImageView next = new ImageView(img1);
+        ImageView back = new ImageView(img2);
+        ImageView export = new ImageView(img3);
+        ImageView browser_white = new ImageView(img4);
+        ImageView file = new ImageView(img5);
+        ImageView browser_dark = new ImageView(img6);
         //Scene 1
         Label s1_l1 = new Label("Directory:");
         TextField directory = new TextField();
@@ -36,6 +50,7 @@ public class Main extends Application {
         directoryChooser.setInitialDirectory(new File("src"));
 
         Button s1_b1 =new Button("Browse");
+        s1_b1.setGraphic(browser_white);
         s1_b1.setOnAction(e -> {
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
             directory.setText(selectedDirectory.getAbsolutePath());
@@ -43,9 +58,7 @@ public class Main extends Application {
             primaryStage.setTitle("Spam Buster - "+location);
         });
         Button s1_b2= new Button("Analyze");
-
-        //First time to train
-
+        s1_b2.setGraphic(next);
         //Scene2
         FileReader f1 = new FileReader(location);
         ObservableList<TestFile> Data = f1.getDataList();
@@ -68,6 +81,7 @@ public class Main extends Application {
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         Button s2_b1 = new Button("Open File");
+        s2_b1.setGraphic(file);
         s2_b1.setOnAction(e->{
             ObservableList<TestFile> selectedRow= tableView.getSelectionModel().getSelectedItems();
             try {
@@ -78,6 +92,7 @@ public class Main extends Application {
         });
 
         Button s2_b2 = new Button("Open Directory");
+        s2_b2.setGraphic(browser_dark);
         s2_b2.setOnAction(e->{
             try {
                 Runtime.getRuntime().exec("explorer.exe /select," + location);
@@ -87,6 +102,7 @@ public class Main extends Application {
         });
 
         Button s2_b3 = new Button("Export");
+        s2_b3.setGraphic(export);
         s2_b3.setOnAction(e->{
             Exporter e1 = new Exporter(Data);
             try {
@@ -100,11 +116,12 @@ public class Main extends Application {
             a.show();
         });
         Button s2_b4 = new Button("Back");
-
+        s2_b4.setGraphic(back);
         //Scene Configuration
         VBox s2_v1 = new VBox(s2_b4,s2_b3);
         HBox s2_h1 = new HBox(s2_b1,s2_b2);
-        s2_v1.setSpacing(20);
+        s2_v1.setSpacing(600);
+        s2_h1.setSpacing(20);
         BorderPane bPane = new BorderPane();
         bPane.setCenter(tableView);
         bPane.setRight(s2_v1);
@@ -119,7 +136,7 @@ public class Main extends Application {
         gridPane.setHgap(5);
         gridPane.add(s1_b1, 2, 0, 1, 1);
         gridPane.add(s1_b2, 1, 2, 1, 1);
-        scene1= new Scene(gridPane, 490, 70);
+        scene1= new Scene(gridPane, 500, 70);
 
         s2_b4.setOnAction(e->primaryStage.setScene(scene1));
         scene1.getStylesheets().add("sample/resources/scene1-styles.css");
