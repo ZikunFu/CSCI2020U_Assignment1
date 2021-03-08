@@ -23,9 +23,9 @@ public class FileReader {
         WordCounter ham = new WordCounter();
         WordCounter ham2 = new WordCounter();
         WordCounter spam = new WordCounter();
-        hamProb=ham.parseFile(new File("C:/Users/Voice/IdeaProjects/2020U_Assignment1/data/train/ham"));
-        hamProb2=ham2.parseFile(new File("C:/Users/Voice/IdeaProjects/2020U_Assignment1/data/train/ham2"));
-        spamProb=spam.parseFile(new File("C:/Users/Voice/IdeaProjects/2020U_Assignment1/data/train/spam"));
+        hamProb=ham.parseFile(new File("data/train/ham"));
+        hamProb2=ham2.parseFile(new File("data/train/ham2"));
+        spamProb=spam.parseFile(new File("data/train/spam"));
 
         //merge key sets
         System.out.print("merging key sets\n");

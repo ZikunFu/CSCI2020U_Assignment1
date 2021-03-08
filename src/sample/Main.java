@@ -23,7 +23,7 @@ import java.io.IOException;
 
 public class Main extends Application {
     String location="";
-
+    File f;
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -53,14 +53,15 @@ public class Main extends Application {
         s1_b1.setOnAction(e -> {
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
             directory.setText(selectedDirectory.getAbsolutePath());
+            f=selectedDirectory.getAbsoluteFile();
             location=selectedDirectory.getAbsolutePath();
             primaryStage.setTitle("Spam Buster - "+location);
         });
         Button s1_b2= new Button("Analyze");
         s1_b2.setGraphic(next);
         //Scene2
-        //"C:/Users/Voice/IdeaProjects/2020U_Assignment1/data/test/ham"
-        sample.FileReader f1 = new sample.FileReader("C:/Users/Voice/IdeaProjects/2020U_Assignment1/data/test/ham");
+        //"data/test/ham"
+        sample.FileReader f1 = new sample.FileReader("data/test/ham");
         ObservableList<TestFile> Data = f1.analyze();
 
         TableView tableView = new TableView();
