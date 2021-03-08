@@ -8,11 +8,12 @@ public class TestFile {
     private SimpleDoubleProperty  spamProbability;
     private File file;
 
-    public TestFile(String title, String filename, double spamProbability, String actualClass) {
+    public TestFile(String title, String filename, double spamProbability, String actualClass, File file) {
         this.filename = new SimpleStringProperty(filename);
         this.subject = new SimpleStringProperty(title);
         this.spamProbability = new SimpleDoubleProperty(spamProbability);
         this.actualClass = new SimpleStringProperty(actualClass);
+        this.file=file;
     }
 
     //Getter Setters
@@ -28,4 +29,8 @@ public class TestFile {
     public void setFilename(String val) { filename = new SimpleStringProperty(val); }
     public void setSpamProbability(double val) { spamProbability = new SimpleDoubleProperty(val); }
     public void setActualClass(String val) { filename = new SimpleStringProperty(val); }
+    public String toString()
+    {
+        return "title: "+subject + " filename: " + file.getName() + "Prob: " + spamProbability + "class: " + actualClass+"\n";
+    }
 }

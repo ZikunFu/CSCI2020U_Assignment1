@@ -22,8 +22,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main extends Application {
-    String location;
-
+    String location="";
+    File f;
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -48,20 +48,21 @@ public class Main extends Application {
         directory.setPrefWidth(350);
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setInitialDirectory(new File("src"));
-
         Button s1_b1 =new Button("Browse");
         s1_b1.setGraphic(browser_white);
         s1_b1.setOnAction(e -> {
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
             directory.setText(selectedDirectory.getAbsolutePath());
+            f=selectedDirectory.getAbsoluteFile();
             location=selectedDirectory.getAbsolutePath();
             primaryStage.setTitle("Spam Buster - "+location);
         });
         Button s1_b2= new Button("Analyze");
         s1_b2.setGraphic(next);
         //Scene2
-        FileReader f1 = new FileReader(location);
-        ObservableList<TestFile> Data = f1.getDataList();
+        //"data/test/ham"
+        sample.FileReader f1 = new sample.FileReader("data/test/ham");
+        ObservableList<TestFile> Data = f1.analyze();
 
         TableView tableView = new TableView();
         tableView.setItems(Data);
@@ -100,7 +101,6 @@ public class Main extends Application {
                 ioException.printStackTrace();
             }
         });
-
         Button s2_b3 = new Button("Export");
         s2_b3.setGraphic(export);
         s2_b3.setOnAction(e->{
@@ -115,6 +115,7 @@ public class Main extends Application {
             a.setContentText("result.csv created in project directory");
             a.show();
         });
+
         Button s2_b4 = new Button("Back");
         s2_b4.setGraphic(back);
         //Scene Configuration
