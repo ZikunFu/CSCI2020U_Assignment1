@@ -5,14 +5,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 /*
-* This code is used to read all the files and count the words in each file
-* offer the data which can be used in formula
-* then it will read the file in test
+* FileReader contains method analyze()
+* which reads all the files inside training folders
+* and counts the words in each file
+* loads the data into different TreeMaps
+* then it will read the file in the designated directory
+* then calculates the probability and extract subjects of emails
 * with the formula to count the possibility
-* compare them to get result if it is spam or ham
+* then returns an ObservableList<TestFile>
 */
 public class FileReader {
-    // set the map for convenience
+    // initialize map to associates each word to its probability
     Map<String, Double> hamProb = new TreeMap<>();
     Map<String, Double> hamProb2 = new TreeMap<>();
     Map<String, Double> spamProb = new TreeMap<>();
@@ -24,7 +27,7 @@ public class FileReader {
         dir= new File(directory);
     }
     /*
-    @ param hamProb, hamProb2, spamProb they are for reading the train folder
+    @ param ham, ham2, spam uses WordCounter to count the occurrences of words
      */
     public ObservableList<TestFile> analyze() throws IOException {
         String title="no subject";
@@ -32,11 +35,12 @@ public class FileReader {
         WordCounter ham = new WordCounter();
         WordCounter ham2 = new WordCounter();
         WordCounter spam = new WordCounter();
+
         hamProb=ham.parseFile(new File("data/train/ham"));
         hamProb2=ham2.parseFile(new File("data/train/ham2"));
         spamProb=spam.parseFile(new File("data/train/spam"));
 
-        //merge key sets
+        //merge key sets for setting up All-Probability map
         System.out.print("merging key sets\n");
         Set<String> keys1 = hamProb.keySet();
         Set<String> keys2 = spamProb.keySet();
@@ -78,10 +82,12 @@ public class FileReader {
 
         //Main loop
         /*
-        the following code used to read the files you chose in directory
-        with for loop, get the subject, file name, and count the words
-        one by one
-        @break when the file name is cmds, it will break
+        the following code used to read the files from the
+        designated directory with for loop.
+        It retrieve the subject, count the words and uses
+        spam Formula to determine a file's spam probability
+        then store the variables into result (ObservableList<TestFile>)
+        @break Avoiding "cmds" files
          */
         fileList = dir.listFiles();
         for(File current: fileList){
@@ -107,7 +113,6 @@ public class FileReader {
             }
 
             //count word in each file
-            //System.out.print("Counting word\n");
             /*
             use the scanner to count the words
              */
@@ -120,7 +125,6 @@ public class FileReader {
             }
 
             //calcProb with formula
-            //System.out.print("Calculating probability\n");
             Iterator it = temp.iterator();
             double fileProb;
             double n=0.0;

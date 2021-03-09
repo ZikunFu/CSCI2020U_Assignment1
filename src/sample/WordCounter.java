@@ -3,6 +3,11 @@ package sample;
 import java.io.*;
 import java.util.*;
 
+/*
+ * Credit: WordCounter was modified based on Professor Mariana Shimabukuro
+ * It counts
+ */
+
 public class WordCounter{
     File[] content;
     private Map<String, Double> wordCounts;
@@ -41,13 +46,6 @@ public class WordCounter{
         }
         return wordCounts;
     }
-/*
-    private boolean isValidWord(String word){
-        String allLetters = "^[a-zA-Z]+$";
-        // returns true if the word is composed by only letters otherwise returns false;
-        return word.matches(allLetters);
-    }
-*/
 
     private void countWord(String word){
         if(wordCounts.containsKey(word)){
@@ -57,31 +55,5 @@ public class WordCounter{
             wordCounts.put(word, 1.0);
         }
     }
-    /*
-    public void output(int minCount, File dir) throws IOException{
-        System.out.println("Saving word counts to file:" + dir.getAbsolutePath());
-        System.out.println("Total words:" + wordCounts.keySet().size());
 
-        if (!dir.exists()){
-            dir.createNewFile();
-            if (dir.canWrite()){
-                PrintWriter fileOutput = new PrintWriter(dir);
-
-                Set<String> keys = wordCounts.keySet();
-                Iterator<String> keyIterator = keys.iterator();
-
-                while(keyIterator.hasNext()){
-                    String key = keyIterator.next();
-                    Double count = wordCounts.get(key);
-                    // testing minimum number of occurances
-                    if(count>=minCount){
-                        fileOutput.println(key + ": " + count);
-                    }
-                }
-                fileOutput.close();
-            }
-        }else{
-            System.out.println("Error: the output file already exists: " + dir.getAbsolutePath());
-        }
-    }*/
 }

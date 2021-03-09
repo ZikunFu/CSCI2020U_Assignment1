@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,16 +19,18 @@ import javafx.stage.Stage;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicReference;
-
+/*
+ * Main is the launcher for the application
+ * It manages all UI elements
+ * */
 public class Main extends Application {
     String location="";
-    File f;
     @Override
     public void start(Stage primaryStage) throws Exception{
         Scene scene1, scene2;
         primaryStage.setTitle("Spam Buster");
-        //image setting
+
+        //loading resources
         Image img1 = new Image("sample/resources/next.png",20,20,true,true);
         Image img2 = new Image("sample/resources/back.png",20,20,true,true);
         Image img3 = new Image("sample/resources/export.png",20,20,true,true);
@@ -46,24 +47,24 @@ public class Main extends Application {
         //Scene 1
         // this is for the first Scene which allow people to choose the directory and get the analysis
         /*
-        * @param s1_l1 the label of Directory
-        * @param s1_b1 the button of Browse, allow people to choose the directory
-        * @param s1_b2 the button for Analyze
-        * @set Graphic(next) jump to the next Scene
+        * @param s1_l1 the label of DirectoryChooser
+        * @param s1_b1 the button of Browse, allow user to choose the directory
+        * @param s1_b2 the button for Analyze which jump to the next Scene
+        * @set Graphic(next) add icon to button
         * */
         Label s1_l1 = new Label("Directory:");
         TextField directory = new TextField();
         directory.setPrefWidth(350);
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setInitialDirectory(new File("data"));
-        Button s1_b1 =new Button("Browse");
-
         TableView tableView = new TableView();
+
+        //Directory chooser
+        Button s1_b1 =new Button("Browse");
         s1_b1.setGraphic(browser_white);
         s1_b1.setOnAction(e -> {
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
             directory.setText(selectedDirectory.getAbsolutePath());
-            f = selectedDirectory.getAbsoluteFile();
             location = selectedDirectory.getAbsolutePath();
             primaryStage.setTitle("Spam Buster - " + location);
             sample.FileReader f1 = new sample.FileReader(location);
@@ -75,9 +76,10 @@ public class Main extends Application {
             }
             tableView.setItems(Data);
         });
+
+        //Button to traverse to Scene 2
         Button s1_b2= new Button("Analyze");
         s1_b2.setGraphic(next);
-
         //Scene2
         //"data/test/ham"
         // the chart showing the chart for the answers and if they are spam or not
@@ -98,10 +100,12 @@ public class Main extends Application {
 
         tableView.getColumns().setAll(col1, col2,col3,col4);
         tableView.getStylesheets().add("sample/resources/table-styles.css");
-        tableView.setPrefWidth(700);
+        tableView.setPrefWidth(870);
         tableView.setPrefHeight(600);
 
-        //this is for features, open file, open directory, export
+        //Button functionalities
+
+        //Open the file from the user selected row of tableview
         Button s2_b1 = new Button("Open File");
         s2_b1.setGraphic(file);
         s2_b1.setOnAction(e->{
@@ -113,6 +117,7 @@ public class Main extends Application {
             }
         });
 
+        //Open the directory chosen by user
         Button s2_b2 = new Button("Open Directory");
         s2_b2.setGraphic(browser_dark);
         s2_b2.setOnAction(e->{
@@ -122,6 +127,8 @@ public class Main extends Application {
                 ioException.printStackTrace();
             }
         });
+
+        //Export TableView into a .csv file
         Button s2_b3 = new Button("Export");
         s2_b3.setGraphic(export);
         s2_b3.setOnAction(e->{
@@ -137,9 +144,10 @@ public class Main extends Application {
             a.show();
         });
 
-
+        //Button to traverse to Scene 1
         Button s2_b4 = new Button("Back");
         s2_b4.setGraphic(back);
+
         //Scene Configuration
         VBox s2_v1 = new VBox(s2_b4,s2_b3);
         HBox s2_h1 = new HBox(s2_b1,s2_b2);

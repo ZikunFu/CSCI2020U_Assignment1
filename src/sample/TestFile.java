@@ -4,10 +4,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import java.io.File;
 /*
-* build a class describe the file characteristics
-* add the new feature "File file" which can save the file in the class
-* can immediately open the file after saving
-* return a class
+* TestFile class contains a file's variable
+* It also set up Property for TableView
 * */
 public class TestFile {
     private SimpleStringProperty filename,actualClass,subject;
@@ -36,8 +34,4 @@ public class TestFile {
     public void setFilename(String val) { filename = new SimpleStringProperty(val); }
     public void setSpamProbability(double val) { spamProbability = new SimpleDoubleProperty(val); }
     public void setActualClass(String val) { filename = new SimpleStringProperty(val); }
-    public String toString()
-    {
-        return "title: "+subject + " filename: " + file.getName() + "Prob: " + spamProbability + "class: " + actualClass+"\n";
-    }
 }
