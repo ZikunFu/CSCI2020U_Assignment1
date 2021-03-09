@@ -5,8 +5,10 @@ import java.util.*;
 
 /*
  * Credit: WordCounter was modified based on Professor Mariana Shimabukuro
- * It counts
- */
+ * With addition of method calcProb which receive map of word occurences
+ * and divide by the number of files contained in the directory
+ * Also minor adjustment of variables from type int to type double
+ * */
 
 public class WordCounter{
     File[] content;

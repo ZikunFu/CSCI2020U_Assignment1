@@ -1,14 +1,12 @@
 package sample;
 
 import javafx.collections.ObservableList;
-
 import java.io.FileWriter;
 import java.io.IOException;
-//this code is used to save data in csv file
 /*
-*fill all the data in a csv file called result.csv
-*return a full csv file
- */
+ *Exporter is used to save data from tableview to a csv file
+ *,it generates a formatted csv file named result.csv
+ * */
 public class Exporter {
     ObservableList<TestFile> list;
     Exporter(ObservableList<TestFile> list){ this.list=list; }
@@ -23,9 +21,7 @@ public class Exporter {
         csvWriter.append(",");
         csvWriter.append("File Name");
         csvWriter.append("\n");
-        /*
-        fill the data with for-loop in the .csv file
-         */
+
         for(int i=0;i< list.size();i++){
             csvWriter.append(list.get(i).getSubject());
             csvWriter.append(",");

@@ -5,9 +5,9 @@ Member: Zikun Fu (100742730)
         Chen Yang (100742300)
 Screenshots of running application:
 Scene1:
-![alt text](https://github.com/ZikunFu/CSCI2020U_Assignment1/src/sample/resources/App_screenshot_1.png)
+![alt text](https://github.com/ZikunFu/CSCI2020U_Assignment1/blob/master/src/sample/resources/App_screenshot_1.png)
 Scene2:
-![alt text](https://github.com/ZikunFu/CSCI2020U_Assignment1/src/sample/resources/App_screenshot_2.png)
+![alt text](https://github.com/ZikunFu/CSCI2020U_Assignment1/blob/master/src/sample/resources/App_screenshot_2.png)
 b. Improvements: briefly describe the improvements you made to the interface and/or the
 model (if any).
     1.Directory Chooser for folder selection.
@@ -29,5 +29,5 @@ application.
 d. Other resources: any references to other materials/libraries that you might have used on
 your solution or model improvement
     WordCounter.java provided by professor Mariana Shimabukuro in canvas.
-    Button Icons from free opensource website
-    Apple button CSS from "https://www.apple.com/ca/"
+    Button Icons from free opensource website "https://www.flaticon.com/".
+    Apple button CSS from "https://www.apple.com/ca/".

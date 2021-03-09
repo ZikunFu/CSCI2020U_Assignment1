@@ -1,19 +1,20 @@
 package sample;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 /*
-* FileReader contains method analyze()
-* which reads all the files inside training folders
-* and counts the words in each file
-* loads the data into different TreeMaps
-* then it will read the file in the designated directory
-* then calculates the probability and extract subjects of emails
-* with the formula to count the possibility
-* then returns an ObservableList<TestFile>
-*/
+ * FileReader contains method analyze()
+ * which reads all the files inside training folders
+ * and counts the words in each file
+ * loads the data into different TreeMaps
+ * then it will read the file in the designated directory
+ * then calculates the probability and extract subjects of emails
+ * with the formula to count the possibility
+ * then returns an ObservableList<TestFile>
+* */
 public class FileReader {
     // initialize map to associates each word to its probability
     Map<String, Double> hamProb = new TreeMap<>();
