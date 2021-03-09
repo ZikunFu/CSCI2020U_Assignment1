@@ -21,10 +21,11 @@ c. How to run: \
 &nbsp;&nbsp;&nbsp;&nbsp;1.Install java jdk-14 or higher version.\
 &nbsp;&nbsp;&nbsp;&nbsp;2.Include javafx-sdk-15.0.1 as library.\
 &nbsp;&nbsp;&nbsp;&nbsp;3.Note: Launching from IDE need to add VM arguments:\
-&nbsp;&nbsp;&nbsp;&nbsp;"--module-path /path/to/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml"
+&nbsp;&nbsp;&nbsp;&nbsp;"--module-path /path/to/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml"\
 &nbsp;&nbsp;&nbsp;&nbsp;4.Launch Main.java.\
 &nbsp;&nbsp;&nbsp;&nbsp;5.Use "Browse" to select Directory "data/test/ham" or "data/test/spam".
 
 d. Other resources: \
 &nbsp;&nbsp;&nbsp;&nbsp;1.WordCounter.java provided by professor Mariana Shimabukuro in canvas.\
+&nbsp;&nbsp;&nbsp;&nbsp;2.Button Icons from free opensource website "flaticon.com"\
 &nbsp;&nbsp;&nbsp;&nbsp;3.Apple button CSS from "https://www.apple.com/ca/".
